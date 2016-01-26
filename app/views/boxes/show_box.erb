@@ -1,6 +1,13 @@
-<h1>Here is your box:</h1>
+<h1>Here is your box and its contents:</h1>
 
-<%= @boxes.name %><form action="/boxes/<%= @boxes.id %>/delete" method="POST">
+<%= @boxes.name %>
+<br>
+<% @boxes.items.each_with_index do |item, i| %>
+  <%= (i + 1).to_s + ": " %>
+  <%= item.item_name %><br>
+<% end %>
+<br>
+Delete box <form action="/boxes/<%= @boxes.id %>/delete" method="POST">
 <input id="hidden" type="hidden" name="_method" value="Delete Tweet">
 <input type="submit" value="delete">
 </form>
