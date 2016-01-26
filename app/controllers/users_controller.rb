@@ -4,47 +4,38 @@ class UsersController < ApplicationController
     if logged_in?
       redirect '/boxes'
     else
-      redirect '/users/signup'
+      erb :'/users/signup'
     end
   end
 
   post '/signup' do 
     if params[:username] == "" || params[:password] == ""
       redirect '/signup'
-      binding.pry
     else
       @user = User.create(:username => params[:username], :password => params[:password])
-      session[:user_id] = @user.id
-      @user.save
+      session[:user_id] = @user.id 
       redirect '/boxes'
     end
   end
 
-  get '/login' do
-    if logged_in?
-      redirect '/boxes'
-    else
+  get '/login' do 
+    @error_message = params[:error]
+    if !session[:user_id]
       erb :'/users/login'
-    end
-  end
-
-  post '/login' do
-    user = User.find_by(:username => params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect "/boxes"
     else
-      redirect to '/signup'
+      redirect '/boxes'
     end
   end
 
-  get '/logout' do
-    if logged_in?
-      session.clear
+  post '/login' do 
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect '/boxes'
+    else
+      redirect '/signup'
     end
-    redirect '/login'
   end
-  
 
 
 end

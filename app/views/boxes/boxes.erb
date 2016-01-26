@@ -1,13 +1,5 @@
 Welcome, <%= current_user.username %>
 
-<h1>Here is a list of all of your boxes:</h1>
+<h1>Your boxes:</h1>
 
-<% @boxes.each_with_index do |box, i| %>
-  <%= (i + 1).to_s + ": " %>
-  <a href="/boxes/<%= box.slug %>"><%= box.name %></a><br>
-<% end %>
-
-<p>
-<a href="/boxes/new">Create a new box</a>
-</p>
-<a href="/logout">Log out</a>
+<p><a href="/logout">Log out</a></p>
