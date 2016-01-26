@@ -1,0 +1,11 @@
+<h1>Here are your items:</h1>
+
+<% @item.each_with_index do |item, i| %>
+  <%= (i + 1).to_s + ": " %>
+  <%= item.item_name %><br>
+<% end %>
+
+<p>
+<a href="/items/new">Add another Item</a><br>
+<a href="/boxes">Go back to Boxes list</a>
+</p>
