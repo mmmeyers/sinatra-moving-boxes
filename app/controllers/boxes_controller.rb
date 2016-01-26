@@ -2,7 +2,8 @@ class BoxesController < ApplicationController
 
   get '/boxes' do 
     if logged_in?
-      @boxes = Box.all 
+      @boxes = current_user.boxes
+
       erb :'/boxes/boxes'
     else
       redirect '/login'
@@ -21,7 +22,9 @@ class BoxesController < ApplicationController
     if !logged_in?
       erb :error
     else
-      Box.create(params)
+      @box = Box.create(:name => params[:name])
+      @box.user_id = current_user.id
+      @box.save
       redirect '/boxes'
     end
   end
