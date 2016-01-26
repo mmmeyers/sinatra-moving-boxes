@@ -27,10 +27,9 @@ class BoxesController < ApplicationController
   end
 
   get '/boxes/:id' do 
-    if logged_in?
-      @boxes = Box.all 
+    if logged_in? 
       @boxes = Box.find_by_id(params[:id])
-      erb :'/boxes/show'
+      erb :'/boxes/show_box'
     else
       redirect '/login'
     end

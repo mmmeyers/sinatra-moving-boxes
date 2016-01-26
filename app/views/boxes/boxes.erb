@@ -3,7 +3,7 @@ Welcome, <%= current_user.username %>
 <h1>Your boxes:</h1>
 
 <% @boxes.each do |box| %>
-  <%= box.name %><br>
+  <a href="/boxes/<%= box.id %>"><%= box.name %><br>
 <% end %>
 
 <p><a href="/boxes/new">Create a new box</a></p>
