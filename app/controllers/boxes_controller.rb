@@ -8,18 +8,33 @@ class BoxesController < ApplicationController
     else
       redirect '/'
     end
-
   end
 
-  get '/boxes/:slug' do
-  @box = Box.find_by_slug(params[:slug])
-
-    if is_logged_in?
-      erb :'/boxes/show_box'
+  get '/boxes/new' do
+    if logged_in?
+      erb :'/boxes/new'
     else
       redirect '/login'
     end
   end
-    
+
+  post '/boxes/new' do
+    if params[:name] != nil
+      @box = Box.create(:name => params[:name])
+      @box.user = User.find(session[:user_id])
+      @box.save
+      redirect '/boxes'
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/boxes/:id' do
+    binding.pry
+    redirect_if_not_logged_in
+    @box = Box.find(params[:id])
+    erb :'/boxes/show_box'
+  end
+
 
 end
