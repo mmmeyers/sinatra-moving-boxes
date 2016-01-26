@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
 
   get '/items' do
     if logged_in?
-      @item = Item.all 
+      @item = current_user.items
       erb :'/items/items'
     end
   end
@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
     else
       @item = Item.create(:item_name => params[:item_name])
       @item.user_id = current_user.id
+      @item.box_id = params[:box_id]
       @item.save
       redirect '/items'
     end
