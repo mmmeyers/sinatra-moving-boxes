@@ -3,11 +3,12 @@ class Box < ActiveRecord::Base
   belongs_to :user
 
   def slug
-    name.downcase.strip.gsub(" ", "-")
+    self.name.gsub(/\W+/, '').downcase
   end
 
   def self.find_by_slug(slug)
     self.all.find {|box| box.slug == slug}
+    self.find_by(:name => @name)
   end
 
 

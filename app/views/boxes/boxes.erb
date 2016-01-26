@@ -1,4 +1,7 @@
-<h1>Your Boxes:</h1>
+Welcome, <%= current_user.username %>
 
+<h1>Here is a list of all of your boxes:</h1>
 
-<a href="/logout">Log Out</a>
+<% @boxes.each do |box| %>
+  <a href="/boxes/<%= box.slug %>"><%= box.name %></a>
+<% end %>
