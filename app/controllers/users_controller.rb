@@ -1,10 +1,23 @@
 class UsersController < ApplicationController
 
+  get '/users/:id' do 
+    if !logged_in
+      redirect '/boxes'
+    end
+
+    @user = User.find(params[:id])
+    if !@user.nil? && @user == current_user
+      erb :'/boxes/boxes'
+    else
+      redirect '/boxes'
+    end
+  end
+
   get '/signup' do 
     if logged_in?
       redirect '/boxes'
     else
-      erb :'/users/signup'
+    erb :'/users/signup'
     end
   end
 
@@ -13,17 +26,17 @@ class UsersController < ApplicationController
       redirect '/signup'
     else
       @user = User.create(:username => params[:username], :password => params[:password])
+      @user.save
       session[:user_id] = @user.id 
-      redirect '/boxes'
     end
+      redirect '/boxes'
   end
 
   get '/login' do 
-    @error_message = params[:error]
-    if !session[:user_id]
-      erb :'/users/login'
-    else
+    if logged_in?
       redirect '/boxes'
+    else
+    erb :'/users/login'
     end
   end
 
@@ -33,9 +46,15 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect '/boxes'
     else
-      redirect '/signup'
+      erb :error
     end
   end
 
+  get '/logout' do
+    if session[:user_id] != nil
+      session.destroy
+      redirect '/login'
+    end
+  end
 
 end

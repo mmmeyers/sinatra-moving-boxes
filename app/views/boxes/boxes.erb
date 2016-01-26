@@ -2,4 +2,8 @@ Welcome, <%= current_user.username %>
 
 <h1>Your boxes:</h1>
 
+<% @boxes.each do |box| %>
+  <%= box.name %>
+<% end %>
+
 <p><a href="/logout">Log out</a></p>
