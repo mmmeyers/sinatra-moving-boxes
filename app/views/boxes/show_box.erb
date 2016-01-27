@@ -15,7 +15,7 @@ Delete box <form action="/boxes/<%= @boxes.id %>/delete" method="POST">
 </form>
 <p>Edit your box:</p>
 <form action="/boxes/<%= @boxes.id %>" method="POST">
-New Box Name: <input type="text" name="name" value="name">
+New Box Name: <input type="text" name="name" value=" <%= @boxes.name %>">
 <input type="submit" value="submit">
 </form>
 <br>
