@@ -1,5 +1,6 @@
-<h1>Create a new Item</h1>
-<h3>Then select the box you want it to go in</h3>
+<h1>Add a new Item</h1>
+
+<h3>Then select the box you want it to go in:</h3>
 
 <form action="/items" method="POST">
 <p>Item Name: <input type="text" name="item_name" id="user_id"></p>
@@ -9,7 +10,6 @@
   <%= box.name %><input id="<%= box.name %>" type="checkbox" name="box_id" value="<%= box.id %>">
 <% end %>
 </p>
+
 <input type="submit" value="submit">
-
-
 </form>

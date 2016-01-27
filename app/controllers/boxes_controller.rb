@@ -19,13 +19,17 @@ class BoxesController < ApplicationController
 
   post '/boxes' do 
     if !logged_in?
-      erb :error
     else
       @box = Box.create(:name => params[:name])
+      if params[:name].empty?
+        erb :new_box_error, :locals => {:name => "You didn't name the box."}
+      else
       @box.user_id = current_user.id
       @box.save
       redirect '/boxes'
     end
+    end
+  
   end
 
   get '/boxes/:id' do 
@@ -41,7 +45,11 @@ class BoxesController < ApplicationController
     if logged_in?
       @box = Box.find_by_id(params[:id])
       @box.update(:name => params[:name])
+      if params[:name].empty?
+        erb :edit_box_error, :locals => {:name => "Please give this box a name."}
+      else
       redirect '/boxes'
+      end
     else
       redirect '/login'
     end

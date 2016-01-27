@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       redirect '/boxes'
   end
 
-  get '/login' do 
+  get '/login' do
     if logged_in?
       redirect '/boxes'
     else
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect '/boxes'
     else
-      erb :error
+      erb :login_error
     end
   end
 

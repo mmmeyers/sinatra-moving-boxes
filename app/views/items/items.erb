@@ -2,13 +2,16 @@ Hello, <%= current_user.username %>
 
 <h1>Here are your items:</h1>
 
+<p>
+<h4>Item (Box)</h4>
 <% @item.each_with_index do |item, i| %>
   <%= (i + 1).to_s + ": " %>
-  <a href="/items/<%= item.id %>"><%= item.item_name %></a><br>
+  <a href="/items/<%= item.id %>"><%= item.item_name %></a> (<%= item.box.name %>)<br>
 <% end %>
-
+</p>
 <p>
 <a href="/items/new">Add another Item</a><br>
 <a href="/boxes">Go back to Boxes list</a><br>
 <a href="/logout">Log out</a>
 </p>
+
