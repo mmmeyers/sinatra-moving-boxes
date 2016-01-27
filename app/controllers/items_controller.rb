@@ -18,8 +18,8 @@ class ItemsController < ApplicationController
   end
 
   post '/items' do 
-    if !logged_in?
-      erb :error
+    if !logged_in? || params[:item_name] == "" || params[:box_id] == nil
+      erb :error, :locals => {:name => "Please enter an item and/or select a box."}
     else
       @item = Item.create(:item_name => params[:item_name])
       @item.user_id = current_user.id
