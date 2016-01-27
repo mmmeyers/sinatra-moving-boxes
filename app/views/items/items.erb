@@ -4,10 +4,11 @@ Hello, <%= current_user.username %>
 
 <% @item.each_with_index do |item, i| %>
   <%= (i + 1).to_s + ": " %>
-  <%= item.item_name %><br>
+  <a href="/items/<%= item.id %>"><%= item.item_name %></a><br>
 <% end %>
 
 <p>
 <a href="/items/new">Add another Item</a><br>
-<a href="/boxes">Go back to Boxes list</a>
+<a href="/boxes">Go back to Boxes list</a><br>
+<a href="/logout">Log out</a>
 </p>

@@ -4,6 +4,8 @@ class ItemsController < ApplicationController
     if logged_in?
       @item = current_user.items
       erb :'/items/items'
+    else
+      redirect '/login'
     end
   end
 
@@ -24,6 +26,35 @@ class ItemsController < ApplicationController
       @item.box_id = params[:box_id]
       @item.save
       redirect '/items'
+    end
+  end
+
+  get '/items/:id' do
+    if logged_in?
+      @items = Item.find_by(params[:id])
+      erb :'/items/show_item'
+    else
+      redirect '/login'
+    end
+  end
+
+  post '/items/:id' do 
+    if logged_in?
+      @item = Item.find_by_id(params[:id])
+      @item.update(:item_name => params[:item_name])
+      redirect '/items'
+    else
+      redirect '/login'
+    end
+  end
+
+  post '/items/:id/delete' do 
+    if logged_in?
+      @item = Item.find_by_id(params[:id])
+      @item.delete
+      redirect '/items'
+    else
+      redirect '/login'
     end
   end
 

@@ -3,7 +3,6 @@ class BoxesController < ApplicationController
   get '/boxes' do 
     if logged_in?
       @boxes = current_user.boxes
-
       erb :'/boxes/boxes'
     else
       redirect '/login'
@@ -33,15 +32,6 @@ class BoxesController < ApplicationController
     if logged_in? 
       @boxes = Box.find_by_id(params[:id])
       erb :'/boxes/show_box'
-    else
-      redirect '/login'
-    end
-  end
-
-  get '/boxes/edit' do 
-    if logged_in?
-      @box = Box.find_by_id(params[:id])
-      erb :'/boxes/edit'
     else
       redirect '/login'
     end

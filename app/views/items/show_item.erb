@@ -1,0 +1,19 @@
+<h1>Here is your Item</h1>
+
+<%= @items.item_name %>
+
+<form action="/items/<%= @items.id %>/delete" method="POST">
+<input id="hidden" type="hidden" name="_method" value="Delete Tweet">
+<input type="submit" value="delete">
+</form>
+
+<p>Edit your item:</p>
+<form action="/items/<%= @items.id %>" method="POST">
+New Item Name: <input type="text" name="item_name">
+<input type="submit" value="submit">
+</form>
+
+<br>
+<a href="/boxes">Go back to Boxes list</a><br>
+<a href="/items">Go back to Items list</a><br>
+<a href="/logout">Log out</a>
