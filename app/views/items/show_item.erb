@@ -9,7 +9,7 @@
 
 <p>Edit your item:</p>
 <form action="/items/<%= @item.id %>" method="POST">
-New Item Name: <input type="text" name="item_name">
+New Item Name: <input type="text" name="item_name" value="<%= @item.item_name %>">
 <input type="submit" value="submit">
 </form>
 
