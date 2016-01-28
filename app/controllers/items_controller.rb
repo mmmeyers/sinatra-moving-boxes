@@ -2,7 +2,8 @@ class ItemsController < ApplicationController
 
   get '/items' do
     if logged_in?
-      @item = current_user.items
+
+      @item = current_user.items.all
       erb :'/items/items'
     else
       redirect '/login'

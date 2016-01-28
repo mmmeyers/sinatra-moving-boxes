@@ -58,8 +58,12 @@ class BoxesController < ApplicationController
   post '/boxes/:id/delete' do 
     if logged_in?
       @box = Box.find_by_id(params[:id])
-      @box.delete
-      redirect '/boxes'
+      if @box.items.empty?
+        @box.delete
+        redirect '/boxes'
+      else
+        erb :delete_box_error
+      end
     else
       redirect '/login'
     end
